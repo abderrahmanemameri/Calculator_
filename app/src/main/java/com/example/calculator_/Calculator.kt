@@ -80,20 +80,30 @@ fun Calculator(modifier: Modifier= Modifier)
 
 
     }
-
-
-
 }
 @Composable
 fun ButtonCalculator(btn : String) {
 Box (modifier = Modifier.padding(start = 10.dp))
 {
-    FloatingActionButton(onClick = {}, modifier = Modifier, shape = CircleShape) {
+    FloatingActionButton(
+        onClick = {},
+        modifier = Modifier,
+        shape = CircleShape,
+        containerColor =color_button(btn)
+    )
+    {
         Text(text = btn)
+    } } }
 
-    }
 
 
-}
+fun color_button(btn: String): Color
+{
+    if (btn=="C"||btn=="AC")return Color.Red
+    if (btn=="("||btn==")")return Color.Gray
+    if (btn=="+"||btn=="-"||btn=="*"||btn=="="||btn=="/")return Color(0xFFFF9800)
+    return Color.Blue
+
+
 
 }

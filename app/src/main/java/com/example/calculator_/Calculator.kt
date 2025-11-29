@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 
 val button_list = listOf(
     "C","(",")","/",
@@ -37,9 +38,9 @@ val button_list = listOf(
 )
 
 @Composable
-fun Calculator(modifier: Modifier= Modifier)
+fun Calculator(modifier: Modifier= Modifier,viewModel: calculaterViewModel)
 {
-    Box(modifier = Modifier.background(Color.White)) {
+    Box(modifier = Modifier.background(Color.White).padding(bottom = 50.dp)) {
         Column (modifier = Modifier.fillMaxSize().padding(top = 20.dp, end = 10.dp),
             horizontalAlignment = Alignment.End)
         {
@@ -53,6 +54,8 @@ fun Calculator(modifier: Modifier= Modifier)
                 overflow = TextOverflow.Ellipsis
 
             )
+            Spacer(modifier= Modifier.weight(1f))
+
             Text(
                 text = "123+456",
 
@@ -61,14 +64,17 @@ fun Calculator(modifier: Modifier= Modifier)
                 color = Color.Black,
                 maxLines = 2,
             )
+
             Spacer(modifier = Modifier.height(20.dp))
 
-            LazyVerticalGrid( columns = GridCells.Fixed(4),     verticalArrangement = Arrangement.spacedBy(12.dp),
+            LazyVerticalGrid( columns = GridCells.Fixed(4),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.padding(start = 20.dp)
 
                 )
             {
                 items(button_list){
-               ButtonCalculator(it)
+               ButtonCalculator(it, onClick = { viewModel.onButtonClick(it)})
                 }
 
 
@@ -82,11 +88,11 @@ fun Calculator(modifier: Modifier= Modifier)
     }
 }
 @Composable
-fun ButtonCalculator(btn : String) {
+fun ButtonCalculator(btn : String,onClick:()-> Unit) {
 Box (modifier = Modifier.padding(start = 10.dp))
 {
     FloatingActionButton(
-        onClick = {},
+        onClick = onClick,
         modifier = Modifier,
         shape = CircleShape,
         containerColor =color_button(btn)

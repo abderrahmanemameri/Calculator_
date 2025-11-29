@@ -13,16 +13,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import com.example.calculator_.ui.theme.Calculator_Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val  calc= ViewModelProvider(this)[calculaterViewModel::class.java]
         enableEdgeToEdge()
         setContent {
             Calculator_Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Calculator(modifier = Modifier.padding(innerPadding).background(Color.White))
+                    Calculator(modifier = Modifier.padding(innerPadding),calc)
 
                 }
             }

@@ -74,7 +74,8 @@ fun Calculator(modifier: Modifier= Modifier,viewModel: calculaterViewModel)
                 )
             {
                 items(button_list){
-               ButtonCalculator(it, onClick = { viewModel.onButtonClick(it)})
+               ButtonCalculator(it, onClick = {
+                   viewModel.onButtonClick(it)})
                 }
 
 
